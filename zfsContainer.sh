@@ -9,8 +9,8 @@ zfs get mounted tank/$VEID -pHovalue | grep '^yes$' >/dev/null || zfs mount tank
 PRIVATE=$(vzlist $VEID -1o private)
 if [ "${#PRIVATE} " -lt 3 ]; then exit -1; fi
 ls $PRIVATE/etc/passwd >/dev/null 2>&1 || exit -1
-
+echo "Running Rsync:\n\t$CMD"
 CMD="rsync --numeric-ids --delete -ar $PRIVATE/ /tank/$VEID/private/$VEID/"
-
-echo $CMD
+`$CMD`
+echo "Rsync completed"
 
