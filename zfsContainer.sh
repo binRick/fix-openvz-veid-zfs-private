@@ -20,7 +20,7 @@ echo "    $CMD"
 echo "Rsync completed"
 
 
-echo "Stopping Container" && vzctl stop $VEID && echo "Disabling Container" && \
+vzctl stop $VEID && echo "Disabling Container" && \
 	vzctl set $VEID --disabled yes --save && echo "Rsyncing private again" && `$CMD` \
 	echo "Reconfiguring private and root" && \
 	vzctl set $VEID --private $NEWPRIVATE --root /tank/$VEID/root --save && \
